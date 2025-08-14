@@ -2,12 +2,11 @@
 #include <iostream>
 using namespace std;
 
-
-int main(int argc, char* argv[]) {
+void aPegaVogais() {
     string texto;
     char vogais[5] = {'a', 'e', 'i', 'o', 'u'};
 
-   getline(cin, texto);
+    getline(cin, texto);
 
     for (int i = 0; i < texto.length(); i++) {
         for (int j = 0; j < 5; j++) {
@@ -16,6 +15,9 @@ int main(int argc, char* argv[]) {
             }
         }
     }
+}
 
+int main(int argc, char* argv[]) {
+    aPegaVogais();
     return 0;
 }

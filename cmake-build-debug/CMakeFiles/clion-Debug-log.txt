@@ -1,0 +1,1 @@
+CMakeLists.txt not found in C:\Users\Lucas Trabalho\CLionProjects\learning_cpp Select CMakeLists.txt
