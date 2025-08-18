@@ -23,9 +23,21 @@ void bigOn2(int n){
     }
 }
 
+// O tempo de execução cresce de forma linear, mas não é proporcional ao tamanho da entrada.
+int bigO(int n){
+    return n + n;
+}
+
+// O tempo de execução cresce de forma logarítmica.
+void logN(int n){
+    for (int i = 1; i < n; i *= 2){
+        cout << i << endl;
+    }
+}
+
 int main(int argc, char const *argv[])
-{
-    bigOn2(5);
+{   
+    logN(100);
     return 0;
 }
 
