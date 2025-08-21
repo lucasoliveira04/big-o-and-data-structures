@@ -10,6 +10,12 @@ class LinkedList:
         self.tail = newNode
         self.length = 1
 
+    def __del__(self):
+        while self.head:
+            temp = self.head.next
+            del self.head
+            self.head = temp
+
     def printList(self):
         temp = self.head
         while temp:
@@ -24,7 +30,7 @@ class LinkedList:
 
     def getLength(self):
         return self.length
-    
+
 def main():
     ll = LinkedList(val=4)
     print(ll.getHead().value)
