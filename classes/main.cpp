@@ -67,15 +67,84 @@ class LinkedList{
             length--;
         }
 
-        void deleteFirst(){
+        void prepend(int val){
+            Node* newNode = new Node(val);
+            if (length == 0){
+                head = newNode;
+                tail = newNode;
+            } else {
+                newNode->next = head;
+                head = newNode;
+            }
+
+            length++;
+        }
+
+        void deleteFirst() {
             if (length == 0) return;
 
             Node* temp = head;
-            head = head->next;
+            if (length == 1) {
+                head = nullptr;
+                tail = nullptr;
+            } else {
+                head = head->next;
+            }
+
             delete temp;
             length--;
+        }
 
-            if (length == 0) tail = nullptr;
+        Node* get(int index){
+            if (index < 0 || index >= length) return nullptr;
+
+            Node* temp = head;
+            for (int i = 0; i < index; i++) {
+                temp = temp->next;
+            }
+            return temp;
+        }
+
+        bool set(int index, int val){
+            Node* temp = get(index);
+            if (temp) {
+                temp->value = val;
+                return true;
+            }
+            return false;
+        }
+
+        bool insert(int index, int val) {
+            if (index < 0 || index > length) return false;
+
+            if (index == 0) {
+                prepend(val);
+                return true;
+            }
+
+            if (index == length) {
+                append(val);
+                return true;
+            }
+
+            Node* newNode = new Node(val);
+            Node* temp = get(index - 1);
+            newNode->next = temp->next;
+            length++;
+            return true;
+        }
+
+        void deleteNode(int index){
+            if (index < 0 || index >= length) return;
+
+            if (index == 0) return deleteFirst();
+            if (index == length - 1) return deleteLast();
+
+            Node* prev = get(index - 1);
+            Node* temp = prev->next;
+            prev->next = temp->next;
+            delete temp;
+            length--;
         }
 
         void getHead(){
@@ -105,20 +174,35 @@ int main(int argc, char const *argv[])
 {
     LinkedList* myLinkedList = new LinkedList(1);
     myLinkedList->append(2);
+    myLinkedList->append(3);
+    myLinkedList->append(4);
 
-    cout << "LL depois de deletar a ultima posição: \n";
+    myLinkedList->prepend(0);
+    
     myLinkedList->printList();
 
-    myLinkedList->deleteLast();
-    cout << "1 - LL depois de deletar a ultima posição: \n";
+    myLinkedList->getHead();
+    myLinkedList->getTail();
+    myLinkedList->getLength();
+
+    myLinkedList->deleteFirst();
+
     myLinkedList->printList();
 
-    myLinkedList->deleteLast();
-    cout << "2 - LL depois de deletar a ultima posição: \n";
-    myLinkedList->printList();
+    cout << myLinkedList->get(2)->value << endl;
 
-    myLinkedList->deleteLast();
-    cout << "3 - LL depois de deletar a ultima posição: \n";
+    myLinkedList->set(2, 10);
+
+    cout << "Posição : " << 2 << " valor: " << myLinkedList->get(2)->value << endl;
+
+    myLinkedList->insert(0, 12);
+
+    myLinkedList->printList();
+    
+    myLinkedList->deleteNode(0);
+    
+    cout << "---------------------" << endl;
+
     myLinkedList->printList();
 
     return 0;
